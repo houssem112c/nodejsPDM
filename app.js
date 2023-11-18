@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const httpPort = 5000;
 const evenementRoutes = require("./routes/evenement");
+const commentRoutes = require('./routes/commentRoutes');
 
 const lessonRoutes = require('./routes/lesson');
 const itemroutes = require('./routes/itemsRoute');
@@ -32,9 +33,9 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
-
-app.use('/api/v1/', lessonRoutes);
-app.use('/', itemroutes);
+app.use('/comments', commentRoutes); // Include Comment Routes
+app.use('/', lessonRoutes);
+app.use('/apis', itemroutes);
 app.use("/api", evenementRoutes);
 app.listen(httpPort, () => {
 	console.log("Server is running on port " + httpPort);
